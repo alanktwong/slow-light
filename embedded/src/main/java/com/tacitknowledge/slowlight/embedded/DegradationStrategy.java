@@ -35,21 +35,22 @@ public interface DegradationStrategy {
 
     /**
      * How long, approximately, before service should timeout.
-     * @return
+     *
+     * @return approximate timeout of service in millis
      */
     Long getServiceTimeout();
 
     /**
      * error object to return if FailurePriority was ERROR_OBJECT in the degradation plan
      * @see DegradationPlan
-     * @return
+     * @return error object per the degradation plan
      */
     Object getErrorObject();
 
     /**
      * Creates a DegradationPlan for the specific call.
-     * @param handler
-     * @return
+     * @param handler, represents the specific call
+     * @return DegradationPlan for a specific call
      */
     DegradationPlan generateDegradationPlan(DegradationHandler handler);
 
@@ -69,7 +70,7 @@ public interface DegradationStrategy {
      * What to return when a successful call is made
      * @param targetCallback to be called
      * @return object for a successful call.  Typically, this just calls the object embedded
-     * @throws Exception
+     * @throws Exception that could be thrown if call fails
      */
     Object overrideResult(final TargetCallback targetCallback) throws Exception;
 
@@ -82,7 +83,7 @@ public interface DegradationStrategy {
     /**
      * Is the specific method on the embedded configured to be bypassed and called normally?
      *
-     * @param method
+     * @param method to test
      * @return true if the method should not be proxied
      * @see DefaultDegradationStrategy
      */

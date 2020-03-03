@@ -11,7 +11,7 @@ import java.util.Random;
  * User: witherspore
  * Date: 6/19/13
  * Time: 7:59 AM
- * <p/>
+ *
  * While custom implementations of the DegradationStrategy can be done, this DefaultDegradationStrategy
  * provides some out of the box capabilities for delaying service calls and creating errors based on handler
  * thread pool utilization
@@ -193,7 +193,7 @@ public class DefaultDegradationStrategy implements DegradationStrategy {
      * a specific call.  It sets up the specific delay for the call, whether it should fail,
      * any error objects, exceptions to be thrown, and passes on the failure priorities and fast fail mode
      *
-     * @param handler
+     * @param handler, represents the specific call
      * @return DegradationPlan for a specific call
      */
     public DegradationPlan generateDegradationPlan(DegradationHandler handler) {
@@ -223,7 +223,7 @@ public class DefaultDegradationStrategy implements DegradationStrategy {
      * When slightly higher than timeout, the handler will timeout the future.get if timeouts is enabled.
      *
      *
-     * @param handler
+     * @param handler, represents the specific call
      * @return millis to sleep the thread
      */
     Long calculateAdjustedResponseTime(DegradationHandler handler) {
@@ -238,10 +238,6 @@ public class DefaultDegradationStrategy implements DegradationStrategy {
 
     /**
      * Returns a random number between two doubles
-     *
-     * @param min
-     * @param max
-     * @return a random number between the min and max
      */
     double randomInRange(double min, double max) {
         Random random = new Random();
@@ -259,8 +255,6 @@ public class DefaultDegradationStrategy implements DegradationStrategy {
      * This pretty much runs the integral between 0 and the pass rate for the natural exponential curve, then divides
      * by the total area.
      *
-     *
-     * @return
      */
     double findUtilizationThresholdForPassRate() {
         final double utilThreshold = (passRate >= ONE_HUNDRED_PERCENT)
@@ -274,11 +268,11 @@ public class DefaultDegradationStrategy implements DegradationStrategy {
      * Compares the adjustedResponseTime (sleep delay) to the exponential curve between service demand
      * and service timeout.
      *
-     * If this exponent adjustedResponseTime if greater that the exponent adjusted utilization threshold for the pass
-     * rate, then it will return true indicating the call should fail
+     * If this exponent adjustedResponseTime is greater that the exponent adjusted utilization threshold for the pass
+     * rate, then it will return true, indicating the call should fail.
      *
-     * @param adjustedResponseTime
-     * @return
+     * @param adjustedResponseTime, sleep delay
+     * @return flag indicating whether call should fail
      */
     protected Boolean checkForFailure(double adjustedResponseTime) {
 
@@ -303,11 +297,11 @@ public class DefaultDegradationStrategy implements DegradationStrategy {
 
     /**
      * Called when generating the DegradationPlan for a DegradationCallable
-     * <p/>
+     *
      * Picks a random exception from the randomExceptions list and tries to instantiate it using
      * a constructor with the String parameter.  If this can not be done, it will try and use the default constructor
      *
-     * @return The
+     * @return randomly generated exception
      */
     public Exception generateRandomException() {
         Exception exception = null;
@@ -336,7 +330,7 @@ public class DefaultDegradationStrategy implements DegradationStrategy {
      * The default strategy just passes through calls to targets via method invocation.  Sub-classes may override
      * @param  targetCallback to be called
      * @return result of call override
-     * @throws Exception
+     * @throws Exception that could be thrown if call fails
      */
     public Object overrideResult(final TargetCallback targetCallback) throws Exception
     {
@@ -380,7 +374,7 @@ public class DefaultDegradationStrategy implements DegradationStrategy {
      * If degraded methods was empty, return false as all methods should be degraded.  If its non-empty, only return
      * false for methods matching the list.
      *
-     * @param method
+     * @param method to test
      * @return false if method should not be degraded.
      */
     public Boolean isMethodExcluded(Method method) {

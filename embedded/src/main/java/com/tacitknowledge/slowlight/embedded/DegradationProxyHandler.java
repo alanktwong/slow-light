@@ -11,7 +11,7 @@ import javassist.util.proxy.MethodHandler;
  * Date: 6/19/13
  * Time: 7:58 AM
  * InvocationHandler for proxied target which manages calls via a ThreadPoolExecutor and DegradationStrategy
- * <p/>
+ *
  * Key class that delays and fails calls to the proxied target depending on ThreadPoolExecution active thread
  * utilization rates and strategy rules
  */

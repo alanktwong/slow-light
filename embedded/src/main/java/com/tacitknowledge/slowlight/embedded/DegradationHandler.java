@@ -10,7 +10,7 @@ import java.util.concurrent.TimeoutException;
 
 /**
  * DegradationHandler for target callback which manages calls via a ThreadPoolExecutor and DegradationStrategy.
- * <p/>
+ *
  * Key class that delays and fails calls to the target callback depending on ThreadPoolExecution active thread
  * utilization rates and strategy rules.
  *
@@ -103,7 +103,7 @@ public class DegradationHandler
      *
      * @param targetCallback to be directly invoked
      * @return Object from target
-     * @throws Exception
+     * @throws Exception that could be thrown
      */
     public Object callDirectly(final TargetCallback targetCallback) throws Exception
     {

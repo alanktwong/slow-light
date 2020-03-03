@@ -6,7 +6,7 @@ import java.util.concurrent.Callable;
  * User: witherspore
  * Date: 9/3/13
  * Time: 9:28 AM
- * <p/>
+ *
  * Callable responsible for delaying thread execution and throwing or returning errors as per the degradation
  * strategy's generated DegradationPlan.
  */
@@ -48,7 +48,7 @@ public class DegradationCallable implements Callable {
      * Callable call implementation for degraded calls
      *
      * @return either the normal call result or the error object
-     * @throws Exception
+     * @throws Exception that could be thrown
      */
     public Object call() throws Exception
     {
@@ -74,7 +74,7 @@ public class DegradationCallable implements Callable {
     /**
      * Sets util to be used for thread locals manipulations.
      *
-     * @param threadLocalUtil
+     * @param threadLocalUtil for manipulating thread locals
      */
     public void setThreadLocalUtil(final ThreadLocalUtil threadLocalUtil)
     {

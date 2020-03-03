@@ -110,7 +110,7 @@ public class DegradationPlan {
      * either returns the error object or throws the exception for a failure as per priority and a non-null error object
      *
      * @return the error object
-     * @throws Exception
+     * @throws Exception the exception per the FailurePriority
      */
     public Object fail() throws Exception {
         if (FailurePriority.EXCEPTION == getFailurePriority() && getRandomException() != null)
